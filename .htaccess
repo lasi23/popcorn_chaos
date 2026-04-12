@@ -1,4 +1,4 @@
-RewriteEngine On
+RewriteEngine on
 RewriteBase /POPCORNCHAOS/
 
 RewriteCond %{REQUEST_URI} !^/POPCORNCHAOS/public/
