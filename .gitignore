@@ -1,0 +1,5 @@
+# Fichier de configuratiion sensible
+.env
+
+# Dossiers de dépendances php (composer)
+/vendor/

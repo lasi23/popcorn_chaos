@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteBase /POPCORNCHAOS/
+
+RewriteCond %{REQUEST_URI} !^/POPCORNCHAOS/public/
+RewriteRule ^(.*)$ public/$1 [L]
