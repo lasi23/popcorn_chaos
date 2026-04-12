@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Pour éviter les erreurs 404 sur les fichiers réels
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rediriger tout vers le index.php du dossier actuel
+RewriteRule ^(.*)$ index.php?page=$1 [L,QSA]

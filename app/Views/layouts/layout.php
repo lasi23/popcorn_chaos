@@ -9,7 +9,7 @@
     <header>
     </header>
     <main>
-        <form action="inscription ">
+        <form action="inscription" method="post">
             <fieldset>
                 <legend>Inscription</legend>
                 <label for="name">Nom :</label>
@@ -23,6 +23,8 @@
                 <label for="password">Mot de passe :</label>
                 <input type="password" id="password" name="password" required>
                 <button type="submit">S'inscrire</button>
+                <label for="confirmPassword">Confirmer le mot de passe :</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
             </fieldset>
         </form>
         <form action="connection" method="post">
@@ -32,6 +34,7 @@
                 <input type="text" id="login" name="login" required>
                 <label for="password">Mot de passe :</label>
                 <input type="password" id="password" name="password" required>
+                </label>
                 <button type="submit">Se connecter</button>
             </fieldset>
         </form>

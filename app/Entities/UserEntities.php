@@ -1,5 +1,5 @@
 <?php
-class User {
+class UserEntities {
     private $id;
     private $name;
     private $surname;
@@ -7,14 +7,6 @@ class User {
     private $email;
     private $password;
 
-    public function __construct($id, $name, $surname, $login, $email, $password) {
-        $this->id = $id;
-        $this->name = $name;
-        $this->surname = $surname;
-        $this->login = $login;
-        $this->email = $email;
-        $this->password = $password;
-    }
 
     // Getters and setters for each property
 
