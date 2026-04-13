@@ -22,9 +22,9 @@
                 <input type="email" id="email" name="email" required>
                 <label for="password">Mot de passe :</label>
                 <input type="password" id="password" name="password" required>
-                <button type="submit">S'inscrire</button>
                 <label for="confirmPassword">Confirmer le mot de passe :</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <button type="submit" name="connection">S'inscrire</button>
             </fieldset>
         </form>
         <form action="connection" method="post">
