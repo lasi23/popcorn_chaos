@@ -24,8 +24,9 @@
                 <input type="password" id="password" name="password" required>
                 <label for="confirmPassword">Confirmer le mot de passe :</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" required>
-                <button type="submit" name="connection">S'inscrire</button>
+                <button type="submit" name="inscription">S'inscrire</button>
             </fieldset>
+            <p><?php echo $messageInscription ?></p>
         </form>
         <form action="connection" method="post">
             <fieldset>
@@ -35,7 +36,7 @@
                 <label for="password">Mot de passe :</label>
                 <input type="password" id="password" name="password" required>
                 </label>
-                <button type="submit">Se connecter</button>
+                <button type="submit" name=""connection>Se connecter</button>
             </fieldset>
         </form>
     </main>
