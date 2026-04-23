@@ -35,6 +35,22 @@
         }
 
 // ---------------------------------------connection-------------------------------
-        
+        public function connect($login) {
+            try {
+                $stmt = $this->bdd->prepare("SELECT login_utilisateur AS login, pswrd_utilisateur AS password FROM utilisateur WHERE login_utilisateur = :login");
+                $stmt->bindValue(':login', $login, PDO::PARAM_STR);
+                $stmt->execute();
+                $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                if ($data) {
+                    $userEntities = new UserEntities;
+                    Hydrator::hydrate($userEntities, $data);
+                    return $userEntities; // ← on retourne l'objet
+                }
+                return false;
+            } catch (PDOException $e) {
+                return false;
+            }
+        }
     }
 ?>

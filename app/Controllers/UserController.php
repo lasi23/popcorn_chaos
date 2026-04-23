@@ -39,7 +39,26 @@ class UserController {
     }
 // -----------------------------------------Connection-------------------
     public function connection() {
-        if(isset($_POST['']))
+        if(isset($_POST['connection'])){
+            if(!empty($_POST['login']) && !empty($_POST['password'])){
+                $login = sanitize($_POST['login']);
+                $password = $_POST['password'];
+                $userModel = new UserModel($this->bdd);
+                $data = $userModel->connect($login);
+                if ($data) {
+                    if (password_verify($password, $data->getPassword())) {
+                        $_SESSION['user_login'] = $data->getLogin();
+                        $_SESSION['user'] = "connecté";
+                        // header('Location: accueil');
+                        return "connection réussi";
+                    } else {
+                        return "Mot de passe incorrect.";
+                    }
+                } else {
+                    return "Login introuvable.";
+                }
+            }
+        }
     }
 }
 ?>

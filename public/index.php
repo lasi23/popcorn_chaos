@@ -14,9 +14,14 @@ session_start();
     
     require_once __DIR__ . '/../app/Entities/UserEntities.php';
     require_once __DIR__ . '/../app/Controllers/UserController.php';
-    
-    $userController = new UserController($bdd);    
-    $messageInscription = $userController->register();
-    require_once __DIR__ . '/../app/Views/layouts/layout.php';
 
+// *********************inscription*********************  
+    $userInscription = new UserController($bdd);    
+    $messageInscription = $userInscription->register();
+    
+    // ***********************Connection***********************
+    $userConnection = new UserController($bdd);
+    $messageConnection = $userConnection->connection();
+    
+    require_once __DIR__ . '/../app/Views/layouts/layout.php';
 ?>

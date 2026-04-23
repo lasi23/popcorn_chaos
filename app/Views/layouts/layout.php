@@ -35,10 +35,11 @@
                 <input type="text" id="login" name="login" required>
                 <label for="password">Mot de passe :</label>
                 <input type="password" id="password" name="password" required>
-                </label>
-                <button type="submit" name=""connection>Se connecter</button>
+            </label>
+            <button type="submit" name="connection">Se connecter</button>
             </fieldset>
         </form>
+        <p><?php echo $messageConnection ?></p>
     </main>
     <footer>
 
