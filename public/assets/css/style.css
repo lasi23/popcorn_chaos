@@ -1,0 +1,290 @@
+
+        :root {
+            --red:     #e31c1c;
+            --red-dk:  #9b0e0e;
+            --orange:  #ff7a00;
+            --yellow:  #f5d800;
+            --green:   #5cdd00;
+            --purple:  #7b2fff;
+            --black:   #0f0d0d;
+            --white:   #fdfaf0;
+            --bone:    #f0e9cc;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--black);
+            background-image:
+                radial-gradient(ellipse 60% 40% at 20% 20%, rgba(227,28,28,.18) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 35% at 80% 75%, rgba(123,47,255,.14) 0%, transparent 60%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1' fill='%23ffffff08'/%3E%3C/svg%3E");
+            min-height: 100vh;
+            font-family: 'Nunito', sans-serif;
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ── HEADER ── */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2.4rem 2rem 1.2rem;
+            position: relative;
+        }
+        header::after {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 90%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--orange), var(--yellow), var(--green), transparent);
+        }
+
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1.4rem;
+        }
+        .logo-wrap img {
+            width: 150px;
+            filter: drop-shadow(0 0 18px var(--orange));
+            animation: float 3.5s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%,100% { transform: translateY(15px) rotate(-2deg); }
+            50%      { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        .site-title {
+            font-family: 'Bangers', cursive;
+            letter-spacing: .06em;
+            line-height: .9;
+        }
+        .site-title span.top {
+            display: block;
+            font-size: clamp(2.6rem, 7vw, 4.2rem);
+            color: var(--yellow);
+            text-shadow: 3px 3px 0 var(--orange), 6px 6px 0 var(--red-dk);
+        }
+        .site-title span.bot {
+            display: block;
+            font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+            color: var(--green);
+            text-shadow: 2px 2px 0 #2a6600, 4px 4px 0 #000;
+            letter-spacing: .1em;
+        }
+
+        /* ── MAIN ── */
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.4rem;
+            justify-content: center;
+            padding: 3.5rem 1.5rem 5rem;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        /* ── CARDS ── */
+        .card {
+            background: rgba(255,255,255,.04);
+            border: 2px solid rgba(255,255,255,.08);
+            border-radius: 18px;
+            padding: 2.2rem 2.4rem 2.4rem;
+            width: 100%;
+            max-width: 380px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(6px);
+            transition: transform .25s, box-shadow .25s;
+        }
+        .card:hover {
+            transform: translateY(-4px) rotate(.4deg);
+            box-shadow: 0 12px 40px rgba(0,0,0,.5), 0 0 0 2px var(--orange);
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity .3s;
+            pointer-events: none;
+        }
+        .card:hover::before { opacity: 1; }
+
+        /* Inscription card accent */
+        .card-inscription::before {
+            background: radial-gradient(circle at top left, rgba(227,28,28,.2), transparent 70%);
+        }
+        /* Connexion card accent */
+        .card-connexion::before {
+            background: radial-gradient(circle at top right, rgba(123,47,255,.22), transparent 70%);
+        }
+
+        /* Corner skull deco */
+        .card::after {
+            content: '💀';
+            position: absolute;
+            top: 12px; right: 16px;
+            font-size: 1.4rem;
+            opacity: .18;
+        }
+
+        /* ── LEGEND / TITLE ── */
+        fieldset { border: none; }
+
+        .card-title {
+            font-family: 'Bangers', cursive;
+            letter-spacing: .08em;
+            font-size: 1.9rem;
+            margin-bottom: 1.8rem;
+            padding-bottom: .6rem;
+            position: relative;
+        }
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 50px; height: 3px;
+            border-radius: 2px;
+        }
+        .card-inscription .card-title { color: var(--yellow); }
+        .card-inscription .card-title::after { background: var(--red); }
+        .card-connexion  .card-title { color: var(--green); }
+        .card-connexion  .card-title::after { background: var(--purple); }
+
+        /* ── FORM FIELDS ── */
+        .field { margin-bottom: 1.1rem; }
+
+        label {
+            display: block;
+            font-size: .78rem;
+            font-weight: 900;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--bone);
+            margin-bottom: .35rem;
+            opacity: .75;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: .7rem 1rem;
+            background: rgba(0,0,0,.4);
+            border: 1.5px solid rgba(255,255,255,.12);
+            border-radius: 8px;
+            color: var(--white);
+            font-family: 'Nunito', sans-serif;
+            font-size: .95rem;
+            outline: none;
+            transition: border-color .2s, box-shadow .2s, background .2s;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: var(--orange);
+            box-shadow: 0 0 0 3px rgba(255,122,0,.25);
+            background: rgba(0,0,0,.6);
+        }
+        input::placeholder { opacity: .35; }
+
+        /* ── BUTTONS ── */
+        .btn {
+            display: inline-block;
+            width: 100%;
+            margin-top: 1.4rem;
+            padding: .85rem 1.4rem;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.25rem;
+            letter-spacing: .12em;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform .15s, box-shadow .15s;
+        }
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0);
+            transition: background .15s;
+        }
+        .btn:hover { transform: scale(1.03); }
+        .btn:hover::after { background: rgba(255,255,255,.08); }
+        .btn:active { transform: scale(.97); }
+
+        .btn-fire {
+            background: linear-gradient(135deg, var(--red-dk), var(--red), var(--orange));
+            color: var(--yellow);
+            text-shadow: 1px 1px 2px rgba(0,0,0,.5);
+            box-shadow: 0 4px 18px rgba(227,28,28,.45), 0 2px 0 #5a0000 inset;
+        }
+        .btn-fire:hover {
+            box-shadow: 0 6px 28px rgba(255,122,0,.55), 0 2px 0 #5a0000 inset;
+        }
+
+        .btn-chaos {
+            background: linear-gradient(135deg, var(--purple), #4a1fcc);
+            color: var(--green);
+            text-shadow: 1px 1px 2px rgba(0,0,0,.5);
+            box-shadow: 0 4px 18px rgba(123,47,255,.45), 0 2px 0 #1a004d inset;
+        }
+        .btn-chaos:hover {
+            box-shadow: 0 6px 28px rgba(123,47,255,.6), 0 2px 0 #1a004d inset;
+        }
+
+        /* ── MESSAGES ── */
+        .msg {
+            margin-top: 1rem;
+            font-size: .88rem;
+            font-weight: 700;
+            color: var(--orange);
+            min-height: 1.2em;
+            text-align: center;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 1.6rem 1rem 2.4rem;
+            font-size: .78rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            opacity: .35;
+        }
+        footer span { color: var(--red); }
+
+        /* ── LIGHTNING SPARKS deco ── */
+        .sparks {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .spark {
+            position: absolute;
+            width: 3px;
+            border-radius: 2px;
+            opacity: 0;
+            animation: spark-fall 4s linear infinite;
+        }
+        @keyframes spark-fall {
+            0%   { opacity: 0; transform: translateY(-20px) rotate(15deg); }
+            10%  { opacity: .8; }
+            90%  { opacity: .4; }
+            100% { opacity: 0; transform: translateY(110vh) rotate(25deg); }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 500px) {
+            .card { padding: 1.6rem 1.4rem; }
+        }
