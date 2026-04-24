@@ -1,8 +1,8 @@
 <?php 
+    session_start();
     ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-session_start();
     require __DIR__ . '/../vendor/autoload.php';
 
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
@@ -23,5 +23,23 @@ session_start();
     $userConnection = new UserController($bdd);
     $messageConnection = $userConnection->connection();
     
+    // **************affichage des pages***********
+    
+    $routes = require '../config/routes.php';
+    $page = $_GET['page'] ?? 'connection';
+    
+    if ($page === '') {
+        $page = 'connection';
+        }
+        
+        if (isset($routes[$page])) {
+            $content = $routes[$page]['view'];
+            $cssPage = $routes[$page]['css'];
+            } else {
+                $content = '../app/Views/404.php';
+                $title   = 'Erreur 404';
+                $cssPage = null;
+                }
+    // **************************layout******************
     require_once __DIR__ . '/../app/Views/layouts/layout.php';
 ?>

@@ -47,10 +47,13 @@ class UserController {
                 $data = $userModel->connect($login);
                 if ($data) {
                     if (password_verify($password, $data->getPassword())) {
-                        $_SESSION['user_login'] = $data->getLogin();
+                        $_SESSION['login'] = $data->getLogin();
+                        $_SESSION['name'] = $data->getName();
+                        $_SESSION['surname'] = $data->getSurname();
+                        $_SESSION['email'] = $data->getEmail();
                         $_SESSION['user'] = "connecté";
-                        // header('Location: accueil');
-                        return "connection réussi";
+                        header('Location: profil');
+                        exit;
                     } else {
                         return "Mot de passe incorrect.";
                     }
