@@ -1,11 +1,7 @@
 <?php
     require_once __DIR__ . '/../Models/UserModel.php';
-class UserController {
-    private $bdd;
+class UserController extends BaseModel {
     
-    public function __construct($bdd) {
-        $this->bdd = $bdd;
-    }
 // ------------------------------------------inscription--------------------------------
     public function register() {
         if(isset($_POST['inscription'])){
