@@ -25,5 +25,21 @@
             $req->execute();
             return true;
         }
+
+        public function getGroups() {
+            $userId = $_SESSION['user_id'];
+
+            $sql = "
+                SELECT id_groupe, nom_groupe
+                FROM groupe g
+                INNER JOIN groupe_utilisateur gu ON gu.id_groupe = g.id
+                WHERE ug.user_id = :user_id
+                ORDER BY g.name ASC
+            ";
+
+            $stmt = $this->bdd->prepare($sql);
+            $stmt->execute(['user_id' => $userId]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
 ?>

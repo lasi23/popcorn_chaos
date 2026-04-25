@@ -16,7 +16,12 @@
     <form method="post">
         <label for="groupe">Groupes</label>
         <select name="groupe" id="groupe">
-
+            <option value="">-- Choisir un groupe --</option>
+    <?php foreach ($groups as $group): ?>
+        <option value="<?= htmlspecialchars($group['id']) ?>">
+            <?= htmlspecialchars($group['name']) ?>
+        </option>
+    <?php endforeach; ?>
         </select>
     </form>
 </fieldset>
