@@ -9,6 +9,10 @@
                     Hydrator::hydrate($groupEntities, $_POST);
                     $groupEntities->setIdCreator($_SESSION['id']);
                     $newGroup->create($groupEntities);
+                    header('Location: ?page=profil');
+                    exit;
+                }else{
+                    return 'We are group : trouver le vôtre';
                 }
             }
         }

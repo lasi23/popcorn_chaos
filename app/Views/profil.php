@@ -5,9 +5,10 @@
 <p><?php echo $_SESSION['email'] ?></p>
 
 <fieldset><legend>Créer un groupe</legend>
-    <form action="create_group">
+    <form method="post">
         <label for="group_name">Nom du groupe</label>
         <input type="text" id="group_name" name="group_name" required>
-        <button class="btn btn-group" action="submit" name="createGroup">Créer</button>
+        <button class="btn btn-group" type="submit" name="create_group">Créer</button>
     </form>
+    <p><?php echo $messagecreationGroup  ?></p>
 </fieldset>
