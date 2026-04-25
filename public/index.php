@@ -36,6 +36,9 @@ error_reporting(E_ALL);
     $createGroup = new GroupController($bdd);
     $messagecreationGroup = $createGroup->create();
 
+    $groupController = new GroupController($bdd);
+    $groups = $groupController->getGroups();
+
     
     // **************affichage des pages***********
     

@@ -17,29 +17,43 @@
         }
 
         public function create($groupEntities) {
-            $code = $this->generateUniqueCode();
+            // Vérifier si le nom existe déjà
+            $check = $this->bdd->prepare("SELECT id_groupe FROM groupe WHERE nom_groupe = :name");
+            $check->execute(['name' => $groupEntities->getName()]);
+            if($check->fetch()) {
+                return false; // nom déjà pris
+            }
+
+            $code = $this->generateUniqueCode(); 
+            
             $req = $this->bdd->prepare("INSERT INTO groupe (nom_groupe, invitation_code, id_createur) VALUES (:namegrp, :code, :idCreator)");
             $req->bindValue(':namegrp', $groupEntities->getName(), PDO::PARAM_STR);
             $req->bindValue(':code', $code, PDO::PARAM_STR);
-            $req->bindvalue(':idCreator', $groupEntities->getIdCreator(), PDO::PARAM_STR);
+            $req->bindValue(':idCreator', $groupEntities->getIdCreator(), PDO::PARAM_STR);
             $req->execute();
+            
+            $idGroupe = $this->bdd->lastInsertId();
+            
+            $req2 = $this->bdd->prepare("INSERT INTO groupe_utilisateur (id_groupe, id_utilisateur) VALUES (:idGroupe, :idUtilisateur)");
+            $req2->bindValue(':idGroupe', $idGroupe, PDO::PARAM_INT);
+            $req2->bindValue(':idUtilisateur', $groupEntities->getIdCreator(), PDO::PARAM_INT);
+            $req2->execute();
+            
             return true;
         }
 
-        public function getGroups() {
-            $userId = $_SESSION['user_id'];
-
+        public function getGroups($userId) {
             $sql = "
-                SELECT id_groupe, nom_groupe
-                FROM groupe g
-                INNER JOIN groupe_utilisateur gu ON gu.id_groupe = g.id
-                WHERE ug.user_id = :user_id
-                ORDER BY g.name ASC
+                SELECT groupe.id_groupe AS id, groupe.nom_groupe AS name
+                FROM groupe
+                INNER JOIN groupe_utilisateur ON groupe_utilisateur.id_groupe = groupe.id_groupe
+                WHERE groupe_utilisateur.id_utilisateur = :user_id
+                ORDER BY groupe.nom_groupe ASC
             ";
 
-            $stmt = $this->bdd->prepare($sql);
-            $stmt->execute(['user_id' => $userId]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $req = $this->bdd->prepare($sql);
+            $req->execute(['user_id' => $userId]);
+            return $req->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 ?>
