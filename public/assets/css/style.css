@@ -76,11 +76,7 @@
             text-shadow: 2px 2px 0 #2a6600, 4px 4px 0 #000;
             letter-spacing: .1em;
         }
-        /* ── MAIN ── */
-        main{
-            height: 100vh;
-        }
-
+        
         /* ── FOOTER ── */
         footer {
             text-align: center;

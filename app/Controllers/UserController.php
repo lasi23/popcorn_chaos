@@ -25,6 +25,8 @@ class UserController {
                         Hydrator::hydrate($userEntities, $_POST);
                         $userEntities->setPassword(password_hash($_POST['password'], PASSWORD_DEFAULT));
                         $userModel->register($userEntities);
+                        header('Location: connection');
+                        exit;
                         
                     } else {
                         return "Les mots de passe ne correspondent pas.";

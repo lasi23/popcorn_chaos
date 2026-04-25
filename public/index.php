@@ -22,6 +22,11 @@ error_reporting(E_ALL);
     // ***********************Connection***********************
     $userConnection = new UserController($bdd);
     $messageConnection = $userConnection->connection();
+
+    // ***************************creation groupe***********************
+    $createGroup = new GroupController($bdd);
+    $messagecreationGroup = $createGroup->create;
+
     
     // **************affichage des pages***********
     
@@ -35,11 +40,12 @@ error_reporting(E_ALL);
         if (isset($routes[$page])) {
             $content = $routes[$page]['view'];
             $cssPage = $routes[$page]['css'];
-            } else {
-                $content = '../app/Views/404.php';
-                $title   = 'Erreur 404';
-                $cssPage = null;
-                }
+            } 
+            // else {
+            //     $content = '../app/Views/404.php';
+            //     $title   = 'Erreur 404';
+            //     $cssPage = null;
+            //     }
     // **************************layout******************
     require_once __DIR__ . '/../app/Views/layouts/layout.php';
 ?>

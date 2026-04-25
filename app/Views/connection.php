@@ -9,7 +9,7 @@
                 </div>
                 <div class="field">
                     <label for="password_con">Mot de passe</label>
-                    <input type="password" id="password_con" name="password" placeholder="......." required>
+                    <input type="password" id="password_con" name="password" autocomplete="off" placeholder="......." required>
                 </div>
                 <button class="btn btn-chaos" type="submit" name="connection">⚡ Se connecter</button>
             </fieldset>
@@ -39,11 +39,11 @@
                 </div>
                 <div class="field">
                     <label for="password_reg">Mot de passe</label>
-                    <input type="password" id="password_reg" name="password" placeholder="......." required>
+                    <input type="password" id="password_reg" name="password" autocomplete="new-password" placeholder="......." required>
                 </div>
                 <div class="field">
                     <label for="confirmPassword">Confirmer le mot de passe</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="........" required>
+                    <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" placeholder="........" required>
                 </div>
                 <button class="btn btn-fire" type="submit" name="inscription">🔥 S'inscrire</button>
             </fieldset>
