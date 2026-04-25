@@ -23,5 +23,7 @@
                 </option>
             <?php endforeach; ?>
         </select>
+        <label for="film">Film</label>
+        <input type="text" id="film" name="film">
     </form>
 </fieldset>
