@@ -38,9 +38,13 @@ error_reporting(E_ALL);
     // ***************************creation groupe***********************
     $createGroup = new GroupController($bdd);
     $messagecreationGroup = $createGroup->create();
-
+// ******************************appel des groupes*************************
     $groupController = new GroupController($bdd);
     $groups = $groupController->getGroups();
+
+    // **********************enregistrer un film******************************
+    $newFilm = new FilmController($bdd);
+    $messageFilm = $newFilm->newFilm();
 
     
     // **************affichage des pages***********

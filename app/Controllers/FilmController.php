@@ -9,6 +9,10 @@
                     $filmEntities = new FilmEntities;
                     Hydrator::hydrate($filmEntities, $_POST);
                     $sendFilm->sendFilm($filmEntities);
+                    header('Location: profil');
+                    exit;
+                }else{
+                    return 'Veuillez remplir tous les champs';
                 }
             }
         }
