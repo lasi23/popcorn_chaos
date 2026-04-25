@@ -2,8 +2,8 @@
     class GroupController extends BaseModel{
 
         public function create() {
-            if(isset($_POST['createGroup'])){
-                if(!empty($_POST['group_name'])&& isset($_SESSION['id'])){
+            if(isset($_POST['create_group'])){
+                if(!empty($_POST['name'])&& isset($_SESSION['id'])){
                     $newGroup = new GroupModel($this->bdd);
                     $groupEntities = new GroupEntities;
                     Hydrator::hydrate($groupEntities, $_POST);
