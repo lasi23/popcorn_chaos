@@ -25,5 +25,6 @@
         </select>
         <label for="film">Film</label>
         <input type="text" id="film" name="film">
+        <button type="submit" name="sendFilm">Enregistrer</button>
     </form>
 </fieldset>

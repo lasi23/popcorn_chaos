@@ -21,7 +21,10 @@ error_reporting(E_ALL);
     require_once __DIR__ . '/../app/Entities/GroupEntities.php';
     require_once __DIR__ . '/../app/Controllers/GroupController.php';
     require_once __DIR__ . '/../app/Models/GroupModel.php';
-
+    
+    require_once __DIR__ . '/../app/Entities/FilmEntities.php';
+    require_once __DIR__ . '/../app/Controllers/FilmController.php';
+    require_once __DIR__ . '/../app/Models/FilmModel.php';
 
 
 // *********************inscription*********************  
