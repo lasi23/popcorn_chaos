@@ -5,23 +5,23 @@ class UserController extends BaseModel {
 // ------------------------------------------inscription--------------------------------
     public function register() {
         if(isset($_POST['inscription'])){
-            if(!empty($_POST['name']) && !empty($_POST['surname']) && !empty($_POST['login']) && !empty($_POST['password']) && !empty($_POST['confirmPassword'])){
-                if(filter_var($_POST['email'] , FILTER_VALIDATE_EMAIL)){
-                    if($_POST['password'] === $_POST['confirmPassword']){
+            if(!empty($_POST['nameUser']) && !empty($_POST['surnameUser']) && !empty($_POST['loginUser']) && !empty($_POST['passwordUser']) && !empty($_POST['confirmPassword'])){
+                if(filter_var($_POST['emailUser'], FILTER_VALIDATE_EMAIL)){
+                    if($_POST['passwordUser'] === $_POST['confirmPassword']){
                         
                         $userModel = new UserModel($this->bdd);
-                        if ($userModel->emailExists($_POST['email'])) {
+                        if($userModel->emailExists($_POST['emailUser'])) {
                             return "Cet email est déjà utilisé.";
                         }
-                        if($userModel->loginExist($_POST['login'])) {
+                        if($userModel->loginExist($_POST['loginUser'])) {
                             return "Ce login est déjà utilisé";
                         }
 
                         $userEntities = new UserEntities;
                         Hydrator::hydrate($userEntities, $_POST);
-                        $userEntities->setPasswordUser(password_hash($_POST['password'], PASSWORD_DEFAULT));
+                        $userEntities->setPasswordUser(password_hash($_POST['passwordUser'], PASSWORD_DEFAULT));
                         $userModel->register($userEntities);
-                        header('Location: connection');
+                        header('Location: ?page=connection');
                         exit;
                         
                     } else {
@@ -31,7 +31,7 @@ class UserController extends BaseModel {
                     return "L'adresse email n'est pas valide.";                  
                 }
             } else {
-                return "Veuillez remplire tous les champs";
+                return "Veuillez remplir tous les champs";
             }
         }
     }
@@ -45,12 +45,12 @@ class UserController extends BaseModel {
                 $data = $userModel->connect($login);
                 if ($data) {
                     if (password_verify($password, $data->getPasswordUser())) {
-                        $_SESSION['id'] = $data->getIdUser();
-                        $_SESSION['login'] = htmlspecialchars($data->getLoginUser());
-                        $_SESSION['name'] = htmlspecialchars($data->getNameUser());
-                        $_SESSION['surname'] = htmlspecialchars($data->getSurnameUser());
-                        $_SESSION['email'] = htmlspecialchars($data->getEmailUser());
-                        $_SESSION['user'] = "connecté";
+                        $_SESSION['idUser'] = $data->getIdUser();
+                        $_SESSION['loginUser'] = htmlspecialchars($data->getLoginUser());
+                        $_SESSION['nameUser'] = htmlspecialchars($data->getNameUser());
+                        $_SESSION['surnameUser'] = htmlspecialchars($data->getSurnameUser());
+                        $_SESSION['emailUser'] = htmlspecialchars($data->getEmailUser());
+                        $_SESSION['userUser'] = "connecté";
                         header('Location: profil');
                         exit;
                     } else {

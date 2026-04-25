@@ -5,11 +5,11 @@
         public function register($userEntities) {
             try {
                 $req = $this->bdd->prepare("INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, login_utilisateur, mail_utilisateur, pswrd_utilisateur) VALUES (:name, :surname, :login, :email, :password)");
-                $req->bindValue(':name', $userEntities->getName(), PDO::PARAM_STR);
-                $req->bindValue(':surname', $userEntities->getSurname(), PDO::PARAM_STR);
-                $req->bindValue(':login', $userEntities->getLogin(), PDO::PARAM_STR);
-                $req->bindValue(':email', $userEntities->getEmail(), PDO::PARAM_STR);
-                $req->bindValue(':password', $userEntities->getPassword(), PDO::PARAM_STR);
+                $req->bindValue(':name', $userEntities->getNameUser(), PDO::PARAM_STR);
+                $req->bindValue(':surname', $userEntities->getSurnameUser(), PDO::PARAM_STR);
+                $req->bindValue(':login', $userEntities->getLoginUser(), PDO::PARAM_STR);
+                $req->bindValue(':email', $userEntities->getEmailUser(), PDO::PARAM_STR);
+                $req->bindValue(':password', $userEntities->getPasswordUser(), PDO::PARAM_STR);
                 $req->execute();
                 return true;
             } catch (PDOException $e) {
@@ -33,7 +33,7 @@
 // ---------------------------------------connection-------------------------------
         public function connect($login) {
             try {
-                $req = $this->bdd->prepare("SELECT id_utilisateur AS id, login_utilisateur AS login, pswrd_utilisateur AS password, nom_utilisateur AS name, prenom_utilisateur AS surname, mail_utilisateur AS email FROM utilisateur WHERE login_utilisateur = :login");
+                $req = $this->bdd->prepare("SELECT id_utilisateur AS idUser, login_utilisateur AS loginUser, pswrd_utilisateur AS passwordUser, nom_utilisateur AS nameUser, prenom_utilisateur AS surnameUser, mail_utilisateur AS emailUser FROM utilisateur WHERE login_utilisateur = :login");
                 $req->bindValue(':login', $login, PDO::PARAM_STR);
                 $req->execute();
                 $data = $req->fetch(PDO::FETCH_ASSOC);

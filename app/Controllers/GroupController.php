@@ -3,7 +3,7 @@
 
         public function create() {
             if(isset($_POST['create_group'])){
-                if(!empty($_POST['name']) && isset($_SESSION['id'])){
+                if(!empty($_POST['nameGroup']) && isset($_SESSION['id'])){
                     $newGroup = new GroupModel($this->bdd);
                     $groupEntities = new GroupEntities;
                     Hydrator::hydrate($groupEntities, $_POST);

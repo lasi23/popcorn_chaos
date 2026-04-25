@@ -6,7 +6,7 @@
 <fieldset><legend>Créer un groupe</legend>
     <form method="post">
         <label for="name">Nom du groupe</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="nameGroup" required>
         <button class="btn btn-group" type="submit" name="create_group">Créer</button>
     </form>
     <p><?php echo $messagecreationGroup  ?></p>
@@ -18,13 +18,13 @@
         <select name="groupe" id="groupe">
             <option value="">-- Choisir un groupe --</option>
             <?php foreach ($groups as $group): ?>
-                <option value="<?= htmlspecialchars($group->getId()) ?>">
-                    <?= htmlspecialchars($group->getName()) ?>
+                <option value="<?= htmlspecialchars($group->getIdGroup()) ?>">
+                    <?= htmlspecialchars($group->getNameGroup()) ?>
                 </option>
             <?php endforeach; ?>
         </select>
         <label for="film">Film</label>
-        <input type="text" id="film" name="film">
+        <input type="text" id="film" name="nameFilm">
         <button type="submit" name="sendFilm">Enregistrer</button>
     </form>
 </fieldset>
