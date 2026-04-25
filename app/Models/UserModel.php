@@ -6,7 +6,7 @@
             $this->bdd = $bdd;
         }
 // ----------------------------------------inscription-----------------------------
-        public function register(UserEntities $userEntities) {
+        public function register($userEntities) {
             try {
                 $req = $this->bdd->prepare("INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, login_utilisateur, mail_utilisateur, pswrd_utilisateur) VALUES (:name, :surname, :login, :email, :password)");
                 $req->bindValue(':name', $userEntities->getName(), PDO::PARAM_STR);
