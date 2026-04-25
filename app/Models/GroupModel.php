@@ -44,7 +44,7 @@
 
         public function getGroups($userId) {
             $sql = "
-                SELECT groupe.id_groupe AS id, groupe.nom_groupe AS nameGroup
+                SELECT groupe.id_groupe AS idGroup, groupe.nom_groupe AS nameGroup
                 FROM groupe
                 INNER JOIN groupe_utilisateur ON groupe_utilisateur.id_groupe = groupe.id_groupe
                 WHERE groupe_utilisateur.id_utilisateur = :user_id

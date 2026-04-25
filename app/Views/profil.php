@@ -15,11 +15,11 @@
 <fieldset><legend>Ajouter un film</legend>
     <form method="post">
         <label for="groupe">Groupes</label>
-        <select name="groupe" id="groupe">
+        <select name="idGroup">
             <option value="">-- Choisir un groupe --</option>
             <?php foreach ($groups as $group): ?>
-                <option value="<?= htmlspecialchars($group->getIdGroup()) ?>">
-                    <?= htmlspecialchars($group->getNameGroup()) ?>
+                <option value="<?= $group->getIdGroup() ?>">
+                    <?= $group->getNameGroup() ?>
                 </option>
             <?php endforeach; ?>
         </select>

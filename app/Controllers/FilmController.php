@@ -4,7 +4,9 @@
 
         public function newFilm() {
             if(isset($_POST['sendFilm'])){
-                if(!empty($_POST['groupe']) && !empty($_POST['film'])){
+
+        var_dump($_POST);
+                if(!empty($_POST['idGroup']) && !empty($_POST['nameFilm'])){
                     $sendFilm = new FilmModel($this->bdd);
                     $filmEntities = new FilmEntities;
                     Hydrator::hydrate($filmEntities, $_POST);
