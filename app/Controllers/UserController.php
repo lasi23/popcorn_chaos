@@ -19,7 +19,7 @@ class UserController extends BaseModel {
 
                         $userEntities = new UserEntities;
                         Hydrator::hydrate($userEntities, $_POST);
-                        $userEntities->setPassword(password_hash($_POST['password'], PASSWORD_DEFAULT));
+                        $userEntities->setPasswordUser(password_hash($_POST['password'], PASSWORD_DEFAULT));
                         $userModel->register($userEntities);
                         header('Location: connection');
                         exit;
@@ -44,12 +44,12 @@ class UserController extends BaseModel {
                 $userModel = new UserModel($this->bdd);
                 $data = $userModel->connect($login);
                 if ($data) {
-                    if (password_verify($password, $data->getPassword())) {
-                        $_SESSION['id'] = $data->getId();
-                        $_SESSION['login'] = htmlspecialchars($data->getLogin());
-                        $_SESSION['name'] = htmlspecialchars($data->getName());
-                        $_SESSION['surname'] = htmlspecialchars($data->getSurname());
-                        $_SESSION['email'] = htmlspecialchars($data->getEmail());
+                    if (password_verify($password, $data->getPasswordUser())) {
+                        $_SESSION['id'] = $data->getIdUser();
+                        $_SESSION['login'] = htmlspecialchars($data->getLoginUser());
+                        $_SESSION['name'] = htmlspecialchars($data->getNameUser());
+                        $_SESSION['surname'] = htmlspecialchars($data->getSurnameUser());
+                        $_SESSION['email'] = htmlspecialchars($data->getEmailUser());
                         $_SESSION['user'] = "connecté";
                         header('Location: profil');
                         exit;

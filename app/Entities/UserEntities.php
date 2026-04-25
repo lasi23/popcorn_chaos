@@ -1,102 +1,102 @@
 <?php
 class UserEntities {
-    private $id;
-    private $name;
-    private $surname;
-    private $login;
-    private $email;
-    private $password;
+    private $idUser;
+    private $nameUser;
+    private $surnameUser;
+    private $loginUser;
+    private $emailUser;
+    private $passwordUser;
 
 
-    // Getters and setters for each property
+   
 
     /**
-     * Get the value of id
+     * Get the value of idUser
      */
-    public function getId() {
-        return $this->id;
+    public function getIdUser() {
+        return $this->idUser;
     }
 
     /**
-     * Set the value of id
+     * Set the value of idUser
      */
-    public function setId($id): self {
-        $this->id = $id;
+    public function setIdUser($idUser): self {
+        $this->idUser = $idUser;
         return $this;
     }
 
     /**
-     * Get the value of name
+     * Get the value of nameUser
      */
-    public function getName() {
-        return $this->name;
+    public function getNameUser() {
+        return $this->nameUser;
     }
 
     /**
-     * Set the value of name
+     * Set the value of nameUser
      */
-    public function setName($name): self {
-        $this->name = $name;
+    public function setNameUser($nameUser): self {
+        $this->nameUser = $nameUser;
         return $this;
     }
 
     /**
-     * Get the value of surname
+     * Get the value of surnameUser
      */
-    public function getSurname() {
-        return $this->surname;
+    public function getSurnameUser() {
+        return $this->surnameUser;
     }
 
     /**
-     * Set the value of surname
+     * Set the value of surnameUser
      */
-    public function setSurname($surname): self {
-        $this->surname = $surname;
+    public function setSurnameUser($surnameUser): self {
+        $this->surnameUser = $surnameUser;
         return $this;
     }
 
     /**
-     * Get the value of login
+     * Get the value of loginUser
      */
-    public function getLogin() {
-        return $this->login;
+    public function getLoginUser() {
+        return $this->loginUser;
     }
 
     /**
-     * Set the value of login
+     * Set the value of loginUser
      */
-    public function setLogin($login): self {
-        $this->login = $login;
+    public function setLoginUser($loginUser): self {
+        $this->loginUser = $loginUser;
         return $this;
     }
 
     /**
-     * Get the value of email
+     * Get the value of emailUser
      */
-    public function getEmail() {
-        return $this->email;
+    public function getEmailUser() {
+        return $this->emailUser;
     }
 
     /**
-     * Set the value of email
+     * Set the value of emailUser
      */
-    public function setEmail($email): self {
-        $this->email = $email;
+    public function setEmailUser($emailUser): self {
+        $this->emailUser = $emailUser;
         return $this;
     }
 
     /**
-     * Get the value of password
+     * Get the value of passwordUser
      */
-    public function getPassword() {
-        return $this->password;
+    public function getPasswordUser() {
+        return $this->passwordUser;
     }
 
     /**
-     * Set the value of password
+     * Set the value of passwordUser
      */
-    public function setPassword($password): self {
-        $this->password = $password;
+    public function setPasswordUser($passwordUser): self {
+        $this->passwordUser = $passwordUser;
         return $this;
     }
 }

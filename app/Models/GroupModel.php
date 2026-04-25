@@ -19,7 +19,7 @@
         public function create($groupEntities) {
             // Vérifier si le nom existe déjà
             $check = $this->bdd->prepare("SELECT id_groupe FROM groupe WHERE nom_groupe = :name");
-            $check->execute(['name' => $groupEntities->getName()]);
+            $check->execute(['name' => $groupEntities->getNameGroup()]);
             if($check->fetch()) {
                 return false; // nom déjà pris
             }
@@ -27,7 +27,7 @@
             $code = $this->generateUniqueCode(); 
             
             $req = $this->bdd->prepare("INSERT INTO groupe (nom_groupe, invitation_code, id_createur) VALUES (:namegrp, :code, :idCreator)");
-            $req->bindValue(':namegrp', $groupEntities->getName(), PDO::PARAM_STR);
+            $req->bindValue(':namegrp', $groupEntities->getNameGroup(), PDO::PARAM_STR);
             $req->bindValue(':code', $code, PDO::PARAM_STR);
             $req->bindValue(':idCreator', $groupEntities->getIdCreator(), PDO::PARAM_STR);
             $req->execute();

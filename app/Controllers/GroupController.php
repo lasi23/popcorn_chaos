@@ -22,10 +22,10 @@
         public function getGroups() {
             if(isset($_SESSION['id'])) {
                 $userEntities = new UserEntities();
-                $userEntities->setId($_SESSION['id']);
+                $userEntities->setIdUser($_SESSION['id']);
                 
                 $getGroup = new GroupModel($this->bdd);
-                $groupsData = $getGroup->getGroups($userEntities->getId());
+                $groupsData = $getGroup->getGroups($userEntities->getIdUser());
                 
                 $groups = [];
                 foreach($groupsData as $groupData) {
