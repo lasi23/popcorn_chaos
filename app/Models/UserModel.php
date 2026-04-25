@@ -33,10 +33,10 @@
 // ---------------------------------------connection-------------------------------
         public function connect($login) {
             try {
-                $stmt = $this->bdd->prepare("SELECT id_utilisateur AS id, login_utilisateur AS login, pswrd_utilisateur AS password, nom_utilisateur AS name, prenom_utilisateur AS surname, mail_utilisateur AS email FROM utilisateur WHERE login_utilisateur = :login");
-                $stmt->bindValue(':login', $login, PDO::PARAM_STR);
-                $stmt->execute();
-                $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                $req = $this->bdd->prepare("SELECT id_utilisateur AS id, login_utilisateur AS login, pswrd_utilisateur AS password, nom_utilisateur AS name, prenom_utilisateur AS surname, mail_utilisateur AS email FROM utilisateur WHERE login_utilisateur = :login");
+                $req->bindValue(':login', $login, PDO::PARAM_STR);
+                $req->execute();
+                $data = $req->fetch(PDO::FETCH_ASSOC);
                 
                 if ($data) {
                     $userEntities = new UserEntities;

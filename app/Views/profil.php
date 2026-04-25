@@ -14,6 +14,9 @@
 
 <fieldset><legend>Ajouter un film</legend>
     <form method="post">
-        <select name="" id=""></select>
+        <label for="groupe">Groupes</label>
+        <select name="groupe" id="groupe">
+
+        </select>
     </form>
 </fieldset>

@@ -46,10 +46,10 @@ class UserController extends BaseModel {
                 if ($data) {
                     if (password_verify($password, $data->getPassword())) {
                         $_SESSION['id'] = $data->getId();
-                        $_SESSION['login'] = $data->getLogin();
-                        $_SESSION['name'] = $data->getName();
-                        $_SESSION['surname'] = $data->getSurname();
-                        $_SESSION['email'] = $data->getEmail();
+                        $_SESSION['login'] = htmlspecialchars($data->getLogin());
+                        $_SESSION['name'] = htmlspecialchars($data->getName());
+                        $_SESSION['surname'] = htmlspecialchars($data->getSurname());
+                        $_SESSION['email'] = htmlspecialchars($data->getEmail());
                         $_SESSION['user'] = "connecté";
                         header('Location: profil');
                         exit;
