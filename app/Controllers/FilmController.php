@@ -8,7 +8,7 @@
                     $sendFilm = new FilmModel($this->bdd);
                     $filmEntities = new FilmEntities;
                     Hydrator::hydrate($filmEntities, $_POST);
-                    $sendFilm->sendFilm();
+                    $sendFilm->sendFilm($filmEntities);
                 }
             }
         }
