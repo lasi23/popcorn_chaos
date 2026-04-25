@@ -1,10 +1,6 @@
 <?php
-    class UserModel {
-        private $bdd;
-
-        public function __construct($bdd) {
-            $this->bdd = $bdd;
-        }
+    class UserModel extends BaseModel{
+        
 // ----------------------------------------inscription-----------------------------
         public function register($userEntities) {
             try {

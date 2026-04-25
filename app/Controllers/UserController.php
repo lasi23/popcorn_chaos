@@ -49,6 +49,7 @@ class UserController {
                 $data = $userModel->connect($login);
                 if ($data) {
                     if (password_verify($password, $data->getPassword())) {
+                        $_SESSION['id'] = $data->getId();
                         $_SESSION['login'] = $data->getLogin();
                         $_SESSION['name'] = $data->getName();
                         $_SESSION['surname'] = $data->getSurname();

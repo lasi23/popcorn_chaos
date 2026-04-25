@@ -11,6 +11,8 @@ error_reporting(E_ALL);
     require_once __DIR__ . '/../config/database.php';
     require_once __DIR__ . '/../app/tools/sanitize.php';
     require_once __DIR__ . '/../app/tools/hydrator.php';
+
+    require_once __DIR__ . '/..app/Model/BaseModel.php'; 
     
     require_once __DIR__ . '/../app/Entities/UserEntities.php';
     require_once __DIR__ . '/../app/Controllers/UserController.php';
