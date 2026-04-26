@@ -44,7 +44,6 @@ error_reporting(E_ALL);
      // ******************************recupère code connection groupe****************
     $getCode = new GroupController($bdd);
     $messageCode = $getCode->getCodeGroup();
-    var_dump($messageCode);
 
     // **********************enregistrer un film******************************
     $newFilm = new FilmController($bdd);

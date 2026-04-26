@@ -16,8 +16,8 @@
     <form method="post">
         <div id="modal-edit" class="modal <?= isset($_POST['getCode']) ? 'active' : '' ?>">
             <div class="modal-content">
-                <h1>coucou</h1>
-                <?php echo $messageCode ?? '' ?>
+                <h1>CODE : </h1>
+                <h2><?php echo $messageCode ?? '' ?><br></h2>
                 <a href="profil" class="close-btn">Fermer</a>            
                 
             </div>
