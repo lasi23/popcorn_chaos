@@ -1,0 +1,20 @@
+/* le modal modification devis */
+.modal {
+    display: none; /* Caché par défaut */
+    position: fixed;
+    z-index: 999;
+    background-color: black;
+    border: 2px solid orange;
+    left: 50%;
+    top: 50%;
+    width: 10%;
+    height: auto;
+    color: orange;
+    text-align: center;
+    & a{
+        color: aliceblue;
+    }
+}
+.modal.active {
+    display: block;
+}

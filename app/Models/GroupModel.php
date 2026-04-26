@@ -55,5 +55,15 @@
             $req->execute(['user_id' => $userId]);
             return $req->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        public function getCodeGroup($idGroup){
+            $sql = "
+                SELECT invitation_code AS codeGroup from groupe where id_groupe = :idGroup";
+            $req = $this->bdd->prepare($sql);
+            $req->bindValue(':idGroup', $idGroup->getIdGroup(), PDO::PARAM_INT);
+            $req->execute();
+            $data = $req->fetch(PDO::FETCH_ASSOC);
+            return $data ? $data['codeGroup'] : 'Code introuvable'; 
+        }
     }
 ?>
