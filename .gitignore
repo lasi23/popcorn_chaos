@@ -2,4 +2,7 @@
 .env
 
 # Dossiers de dépendances php (composer)
-/vendor/
+vendor/
+node_modules/
+cypress/e2e/1-getting-started/
+cypress/e2e/2-advanced-examples

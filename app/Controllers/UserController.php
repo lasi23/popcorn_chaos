@@ -5,9 +5,14 @@ class UserController extends BaseModel {
 // ------------------------------------------inscription--------------------------------
     public function register() {
         if(isset($_POST['inscription'])){
-            if(!empty($_POST['nameUser']) && !empty($_POST['surnameUser']) && !empty($_POST['loginUser']) && !empty($_POST['passwordUser']) && !empty($_POST['confirmPassword'])){
+            if(!empty($_POST['nameUser']) && 
+                !empty($_POST['surnameUser']) && 
+                !empty($_POST['loginUser']) && 
+                !empty($_POST['emailUser']) && 
+                !empty($_POST['passwordUser']) && 
+                !empty($_POST['confirmPasswordUser'])){
                 if(filter_var($_POST['emailUser'], FILTER_VALIDATE_EMAIL)){
-                    if($_POST['passwordUser'] === $_POST['confirmPassword']){
+                    if($_POST['passwordUser'] === $_POST['confirmPasswordUser']){
                         
                         $userModel = new UserModel($this->bdd);
                         if($userModel->emailExists($_POST['emailUser'])) {
@@ -34,6 +39,7 @@ class UserController extends BaseModel {
                 return "Veuillez remplir tous les champs";
             }
         }
+        return null;
     }
 // -----------------------------------------Connection-------------------
     public function connection() {
