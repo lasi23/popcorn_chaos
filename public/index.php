@@ -27,28 +27,18 @@ error_reporting(E_ALL);
     require_once __DIR__ . '/../app/Models/FilmModel.php';
 
 
-// *********************inscription*********************  
-    $userInscription = new UserController($bdd);    
-    $messageInscription = $userInscription->register();
-    
-    // ***********************Connection***********************
-    $userConnection = new UserController($bdd);
-    $messageConnection = $userConnection->connection();
+$userController  = new UserController($bdd);
+$groupController = new GroupController($bdd);
+$filmController  = new FilmController($bdd);
 
-    // ***************************creation groupe***********************
-    $createGroup = new GroupController($bdd);
-    $messagecreationGroup = $createGroup->create();
-// ******************************appel des groupes*************************
-    $groupController = new GroupController($bdd);
-    $groups = $groupController->getGroups();
-     // ******************************recupère code connection groupe****************
-    $getCode = new GroupController($bdd);
-    $messageCode = $getCode->getCodeGroup();
 
-    // **********************enregistrer un film******************************
-    $newFilm = new FilmController($bdd);
-    $messageFilm = $newFilm->newFilm();
-
+$messageInscription   = $userController->register();
+$messageConnection    = $userController->connection();
+$messagecreationGroup = $groupController->create();
+$groups               = $groupController->getGroups();
+$messageCode          = $groupController->getCodeGroup();
+$messageFilm          = $filmController->newFilm();
+$messageEnterGroup    = $groupController->joinGroup();
     
     // **************affichage des pages***********
     

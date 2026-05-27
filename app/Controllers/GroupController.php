@@ -46,9 +46,22 @@
                     return $getCode->getCodeGroup($groupEntities);
 
                 }
-                return 'Veuilez choisir un group';
+                return 'Veuilez choisir un groupe';
             }
             return null;
+        }
+
+        public function joinGroup(){
+            if(isset($_POST['submitSendCode'])){
+                if(!empty('code')){
+                    $joinGroup = new GroupModel($this->bdd);
+                    $groupEntities = new GroupEntities();
+                    $groupEntities->setCodeGroup($_POST['code']);
+                    $userEntities = new UserEntities();
+                    $userEntities->setIdUser($_SESSION['idUSer']);
+                }
+            }
+            return 'Veuillez mettre un code valide';
         }
     }
 ?>
