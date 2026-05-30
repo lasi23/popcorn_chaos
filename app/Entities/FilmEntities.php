@@ -5,9 +5,8 @@
         private $nameFilm;
         private $resumFilm;
         private $drownHat;
-        private $idGroup;
-        
-
+        private $idGroup;      
+        private $idUser;
 
         /**
          * Get the value of idFilm
@@ -67,23 +66,38 @@
         public function setDrownHat($drownHat): self {
                 $this->drownHat = $drownHat;
                 return $this;
-        }
-
-        /**
-         * Get the value of idGroupe
-         */
-        public function getIdGroup() {
-                return $this->idGroup;
-        }
-
+                }
+                
+                /**
+                 * Get the value of idGroupe
+                */
+                public function getIdGroup() {
+                        return $this->idGroup;
+                        }
+                        
         /**
          * Set the value of idGroupe
-         */
+        */
         public function setIdGroup($idGroup): self {
                 $this->idGroup = $idGroup;
                 return $this;
+                }
+                
+        /**
+         * Get the value of idUser
+         */
+        public function getIdUser() {
+                return $this->idUser;
         }
-    }
-    
 
-?>
+        /**
+         * Set the value of idUser
+         */
+        public function setIdUser($idUser): self {
+                $this->idUser = $idUser;
+                return $this;
+        }
+}
+                
+                
+                ?>

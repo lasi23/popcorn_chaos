@@ -5,10 +5,10 @@
         public function newFilm() {
             if(isset($_POST['sendFilm'])){
 
-        var_dump($_POST);
-                if(!empty($_POST['idGroup']) && !empty($_POST['nameFilm'])){
+                if(!empty($_POST['idGroup']) && !empty($_POST['nameFilm']) && !empty($_SESSION['idUser'])){
                     $sendFilm = new FilmModel($this->bdd);
                     $filmEntities = new FilmEntities;
+                    $_POST['idUser'] = intval($_SESSION['idUser']);
                     Hydrator::hydrate($filmEntities, $_POST);
                     $sendFilm->sendFilm($filmEntities);
                     header('Location: profil');

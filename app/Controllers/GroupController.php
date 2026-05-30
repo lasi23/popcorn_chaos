@@ -42,7 +42,7 @@
                 if(!empty($_POST['idGroup'])){
                     $getCode = new GroupModel($this->bdd);
                     $groupEntities = new GroupEntities();
-                    $groupEntities->setIdGroup($_POST['idGroup']);
+                    $groupEntities->setIdGroup(intval($_POST['idGroup']));
                     return $getCode->getCodeGroup($groupEntities);
 
                 }
@@ -56,13 +56,25 @@
                 if(!empty($_POST['code'])){          
                     $joinGroup = new GroupModel($this->bdd);
                     $groupEntities = new GroupEntities();
-                    $groupEntities->setCodeGroup($_POST['code']);
+                    $groupEntities->setCodeGroup(sanitize($_POST['code']));
                     $userEntities = new UserEntities();
-                    $userEntities->setIdUser($_SESSION['idUser']);
+                    $userEntities->setIdUser(sanitize($_SESSION['idUser']));
                     return $joinGroup->joinGroup($groupEntities->getCodeGroup(), $userEntities->getIdUser());
                 }
             }
             return 'Veuillez mettre un code valide';
+        }
+
+        public function takeHat(){
+            $film = [];
+            if(isset($_POST['submitTakeAHate'])){
+                if(!empty($_POST['idGroup']) && intval($_POST['idGroup']) > 0){
+                    $takeHat = new GroupModel($this->bdd);
+                    $film = $takeHat->takeHat(intval($_POST['idGroup']));
+                    return $film;
+                }
+                return 'Veuillez choisir un groupe';
+            }
         }
     }
 ?>

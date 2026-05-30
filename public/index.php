@@ -34,11 +34,12 @@ $filmController  = new FilmController($bdd);
 
 $messageInscription   = $userController->register();
 $messageConnection    = $userController->connection();
-$messagecreationGroup = $groupController->create();
+$messagecreateGroup   = $groupController->create();
 $groups               = $groupController->getGroups();
 $messageCode          = $groupController->getCodeGroup();
 $messageFilm          = $filmController->newFilm();
 $messageEnterGroup    = $groupController->joinGroup();
+$film                 = $groupController->takeHat();
     
     // **************affichage des pages***********
     

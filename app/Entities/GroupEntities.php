@@ -84,6 +84,14 @@
                 $this->idCreator = $idCreator;
                 return $this;
         }
+
+        public static function generateOptions($groups){
+                $html = '';
+                foreach($groups as $group){
+                    $html .= '<option value="' . $group->getIdGroup() . '">' . $group->getNameGroup() . '</option>';
+                }
+                return $html;
+        }
     }
 
 ?>

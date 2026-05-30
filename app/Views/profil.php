@@ -9,7 +9,7 @@
         <input type="text" id="name" name="nameGroup" required>
         <button class="btn btn-group" type="submit" name="create_group">Créer</button>
     </form>
-    <p><?php echo $messagecreationGroup  ?></p>
+    <p><?php echo $messagecreateGroup  ?></p>
 </fieldset>
 
 <fieldset><legend>Afficher le code d'accès à un groupe</legend>
@@ -38,12 +38,7 @@
     <form method="post">
         <label for="groupe">Groupes</label>
         <select name="idGroup">
-            <option value="">-- Choisir un groupe --</option>
-            <?php foreach ($groups as $group): ?>
-                <option value="<?= $group->getIdGroup() ?>">
-                    <?= $group->getNameGroup() ?>
-                </option>
-            <?php endforeach; ?>
+            <?= GroupEntities::generateOptions($groups); ?>
         </select>
         <label for="film">Film</label>
         <input type="text" id="film" name="nameFilm">
@@ -57,4 +52,16 @@
         <input type="text" id="code" name="code">
         <button type="submit" name="submitSendCode">Rejoindre</button>
     </form>
+</fieldset>
+
+<fieldset><legend>Sort un film du chapeau</legend>
+    <form method="post">
+        <select name="idGroup" id="">
+            <?= GroupEntities::generateOptions($groups) ?>
+        </select>
+        <button type="submit" name="submitTakeAHate">Sort ton film du chapeau</button>
+    </form>
+    <?php if(!empty($film)): ?>
+        <p><?= $film['nameFilm'] ?></p>
+    <?php endif; ?>
 </fieldset>

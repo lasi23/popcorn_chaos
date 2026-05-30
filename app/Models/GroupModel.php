@@ -79,5 +79,44 @@
             
             return $req->rowCount() > 0;
         }
+
+        public function takeHat($group){
+            try {
+                $this->bdd->beginTransaction();
+
+                // 1. Tirer un utilisateur aléatoire du groupe
+                $sql1 = "SELECT id_utilisateur FROM groupe_utilisateur WHERE id_groupe = ? ORDER BY RAND() LIMIT 1";
+                $req1 = $this->bdd->prepare($sql1);
+                $req1->bindValue(1, $group, PDO::PARAM_INT);
+                $req1->execute();
+                $user = $req1->fetch();
+
+                // 2. Tirer un film aléatoire de cet utilisateur pas encore tiré
+                $sql2 = "SELECT f.id_film, f.nom_film as nameFilm
+                        FROM film f
+                        INNER JOIN groupe_utilisateur gu ON f.id_groupe = gu.id_groupe
+                        WHERE f.deja_tire = FALSE 
+                        AND gu.id_utilisateur = ?
+                        AND f.id_groupe = ?
+                        ORDER BY RAND() 
+                        LIMIT 1";
+                $req2 = $this->bdd->prepare($sql2);
+                $req2->execute([$user['id_utilisateur'], $group]);
+                $film = $req2->fetch(); 
+
+                if(!$film) return [];
+
+                // 3. Marquer le film comme tiré
+                $sql3 = "UPDATE film SET deja_tire = TRUE WHERE id_film = ?";
+                $req3 = $this->bdd->prepare($sql3);
+                $req3->execute([$film['id_film']]);
+
+                $this->bdd->commit();
+                return $film;
+            } catch(Exception $e) {
+                $this->bdd->rollBack();
+                return false;
+            }
+        }
     }
 ?>
