@@ -26,17 +26,17 @@
 
             $code = $this->generateUniqueCode(); 
             
-            $req = $this->bdd->prepare("INSERT INTO groupe (nom_groupe, invitation_code, id_createur) VALUES (:namegrp, :code, :idCreator)");
-            $req->bindValue(':namegrp', $groupEntities->getNameGroup(), PDO::PARAM_STR);
-            $req->bindValue(':code', $code, PDO::PARAM_STR);
-            $req->bindValue(':idCreator', $groupEntities->getIdCreator(), PDO::PARAM_STR);
+            $req = $this->bdd->prepare("INSERT INTO groupe (nom_groupe, invitation_code, id_createur) VALUES (?, ?, ?)");
+            $req->bindValue(1, $groupEntities->getNameGroup(), PDO::PARAM_STR);
+            $req->bindValue(2, $code, PDO::PARAM_STR);
+            $req->bindValue(3, $groupEntities->getIdCreator(), PDO::PARAM_STR);
             $req->execute();
             
             $idGroupe = $this->bdd->lastInsertId();
             
-            $req2 = $this->bdd->prepare("INSERT INTO groupe_utilisateur (id_groupe, id_utilisateur) VALUES (:idGroupe, :idUtilisateur)");
-            $req2->bindValue(':idGroupe', $idGroupe, PDO::PARAM_INT);
-            $req2->bindValue(':idUtilisateur', $groupEntities->getIdCreator(), PDO::PARAM_INT);
+            $req2 = $this->bdd->prepare("INSERT INTO groupe_utilisateur (id_groupe, id_utilisateur) VALUES (?, ?)");
+            $req2->bindValue(1, $idGroupe, PDO::PARAM_INT);
+            $req2->bindValue(2, $groupEntities->getIdCreator(), PDO::PARAM_INT);
             $req2->execute();
             
             return true;
@@ -64,6 +64,20 @@
             $req->execute();
             $data = $req->fetch(PDO::FETCH_ASSOC);
             return $data ? $data['codeGroup'] : 'Code introuvable'; 
+        }
+
+        public function joinGroup($code, $idUser){
+            $sql = "INSERT ignore INTO groupe_utilisateur (id_groupe, id_utilisateur, importance)
+                    SELECT id_groupe, ?, NULL
+                    FROM groupe
+                    WHERE invitation_code = ?";
+            
+            $req = $this->bdd->prepare($sql);
+            $req->bindValue(1, $idUser, PDO::PARAM_INT);
+            $req->bindValue(2, $code, PDO::PARAM_STR);
+            $req->execute();
+            
+            return $req->rowCount() > 0;
         }
     }
 ?>

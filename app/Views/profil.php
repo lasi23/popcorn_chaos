@@ -4,7 +4,7 @@
 <p> Mail : <?php echo $_SESSION['emailUser'] ?></p>
 
 <fieldset><legend>Créer un groupe</legend>User
-    <form action="createGroup" method="post">
+    <form method="post">
         <label for="name">Nom du groupe</label>
         <input type="text" id="name" name="nameGroup" required>
         <button class="btn btn-group" type="submit" name="create_group">Créer</button>
@@ -13,7 +13,7 @@
 </fieldset>
 
 <fieldset><legend>Afficher le code d'accès à un groupe</legend>
-    <form action="getCode" method="post">
+    <form method="post">
         <div id="modal-edit" class="modal <?= isset($_POST['getCode']) ? 'active' : '' ?>">
             <div class="modal-content">
                 <h1>CODE : </h1>
@@ -35,7 +35,7 @@
 </fieldset>
 
 <fieldset><legend>Ajouter un film</legend>
-    <form action="newFilm" method="post">
+    <form method="post">
         <label for="groupe">Groupes</label>
         <select name="idGroup">
             <option value="">-- Choisir un groupe --</option>
@@ -52,7 +52,7 @@
 </fieldset>
 
 <fieldset><legend>Rejoindre un groupe</legend>
-    <form action="joinGroup" methode>
+    <form method="post">
         <label for="code">Code du groupe</label>
         <input type="text" id="code" name="code">
         <button type="submit" name="submitSendCode">Rejoindre</button>

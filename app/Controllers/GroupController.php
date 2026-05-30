@@ -52,13 +52,14 @@
         }
 
         public function joinGroup(){
-            if(isset($_POST['submitSendCode'])){
-                if(!empty('code')){
+            if(isset($_POST['submitSendCode'])){       
+                if(!empty($_POST['code'])){          
                     $joinGroup = new GroupModel($this->bdd);
                     $groupEntities = new GroupEntities();
                     $groupEntities->setCodeGroup($_POST['code']);
                     $userEntities = new UserEntities();
-                    $userEntities->setIdUser($_SESSION['idUSer']);
+                    $userEntities->setIdUser($_SESSION['idUser']);
+                    return $joinGroup->joinGroup($groupEntities->getCodeGroup(), $userEntities->getIdUser());
                 }
             }
             return 'Veuillez mettre un code valide';
