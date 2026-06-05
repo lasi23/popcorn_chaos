@@ -147,7 +147,7 @@
           </div>
           <button class="btn btn-fire" type="submit" name="sendFilm">🎥 Enregistrer</button>
         </form>
-        <p class="msg"><?php echo $messageFilm  ?? '' ?></p>
+        <p class="msg"><?php echo $messageFilm ?? '' ?></p>
       </div>
     </div>
 
@@ -193,15 +193,12 @@
 
 </body>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    window.onload = function() {
         <?php if (isset($_POST['create_group'])): ?>
             showPanel('create', document.querySelector('[onclick*="create"]'));
         <?php endif; ?>
         <?php if (isset($_POST['getCode'])): ?>
             showPanel('code', document.querySelector('[onclick*="code"]'));
-        <?php endif; ?>
-        <?php if (isset($_POST['sendFilm'])): ?>
-            showPanel('film', document.querySelector('[onclick*="film"]'));
         <?php endif; ?>
         <?php if (isset($_POST['submitSendCode'])): ?>
             showPanel('join', document.querySelector('[onclick*="join"]'));
@@ -209,6 +206,10 @@
         <?php if (isset($_POST['submitTakeAHate']) || !empty($_SESSION['film'])): ?>
             showPanel('hat', document.querySelector('[onclick*="hat"]'));
         <?php endif; ?>
-    });
+        <?php if (isset($_SESSION['openPanel']) && $_SESSION['openPanel'] === 'film'): ?>
+            showPanel('film', document.querySelector('[onclick*="film"]'));
+            <?php unset($_SESSION['openPanel']); ?>
+        <?php endif; ?>
+    };
 </script>
 </html>

@@ -89,6 +89,17 @@ if ($page === 'logout') {
     exit;
 }
 
+// *******************SESSION des films*********************
+
+if(!empty($messageFilm)) {
+    $_SESSION['messageFilm'] = $messageFilm;
+}
+
+if(!isset($_POST['sendFilm'])) {
+    $messageFilm = $_SESSION['messageFilm'] ?? null;
+    unset($_SESSION['messageFilm']);
+}
+
     // **************************layout******************
     require_once __DIR__ . '/../app/Views/layouts/layout.php';
 ?>
