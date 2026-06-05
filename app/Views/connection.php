@@ -19,6 +19,7 @@
     <!-- ── INSCRIPTION ── -->
     <div class="card card-inscription">
         <form action="inscription" method="post">
+            <p class="msg"><?php echo $messageInscription ?? '' ?></p>
             <fieldset>
                 <div class="card-title">Créer un compte</div>
                 <div class="field">
@@ -47,6 +48,5 @@
                 </div>
                 <button class="btn btn-fire" type="submit" name="inscription">🔥 S'inscrire</button>
             </fieldset>
-            <p class="msg"><?php echo $messageInscription ?? '' ?></p>
         </form>
     </div>

@@ -16,10 +16,12 @@ class UserController extends BaseModel {
                         
                         $userModel = new UserModel($this->bdd);
                         if($userModel->emailExists($_POST['emailUser'])) {
-                            return "Cet email est déjà utilisé.";
+                            return "Identifiant déjà enregistré. Un autre vous existe déjà dans le système.
+Cet email est déjà actif. Le clonage est illégal dans 47 systèmes solaires. ";
                         }
                         if($userModel->loginExist($_POST['loginUser'])) {
-                            return "Ce login est déjà utilisé";
+                            return " Ce login est déjà pris. Quelqu'un porte votre nom. Trouvez-le. »
+« Login déjà utilisé. Il vous a volé votre identité avant vous. ";
                         }
 
                         $userEntities = new UserEntities;
@@ -30,13 +32,16 @@ class UserController extends BaseModel {
                         exit;
                         
                     } else {
-                        return "Les mots de passe ne correspondent pas.";
+                        return "Votre mot de passe de confirmation ne correspond pas. Il a changé tout seul.
+Les deux mots de passe ne correspondent pas. Recommencez. Vite.";
                     }
                 } else {
-                    return "L'adresse email n'est pas valide.";                  
+                    return "Adresse email non reconnue dans ce secteur de la galaxie. »
+« Protocole d'identification échoué. Cette adresse email n'existe dans aucune dimension.";                  
                 }
             } else {
-                return "Veuillez remplir tous les champs";
+                return "Vous avez laissé des champs vides. Les champs, ça se remplit. »
+« Remplissez tout. Oui, même ce champ-là. Surtout celui-là. ";
             }
         }
         return null;
@@ -60,10 +65,10 @@ class UserController extends BaseModel {
                         header('Location: profil');
                         exit;
                     } else {
-                        return "Mot de passe incorrect.";
+                        return "C'est pas password123 ? Ah… essayez password1234";
                     }
                 } else {
-                    return "Login introuvable.";
+                    return "Personne de ce nom n'est entré ici. Personne n'en est ressorti.";
                 }
             }
         }

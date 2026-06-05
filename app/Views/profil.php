@@ -49,6 +49,10 @@
       <button class="nav-btn" onclick="showPanel('hat', this)">
         <span class="nav-icon">🎩</span> Tirer au chapeau
       </button>
+
+      <form action="?page=logout" method="post">
+        <button type="submit" class="btn btn-deconnection">Déconnexion</button>
+      </form>
     </nav>
   </aside>
 
@@ -125,7 +129,7 @@
     <div class="form-panel panel-film" id="panel-film">
       <div class="form-card">
         <div class="form-card-title">Ajouter un film</div>
-        <form method="post">
+        <form method="post" id="formFilm">
           <div class="field">
             <label for="idGroupFilm">Groupe</label>
             <select name="idGroup" id="idGroupFilm">
@@ -136,7 +140,9 @@
           </div>
           <div class="field">
             <label for="nameFilm">Titre du film</label>
-            <input type="text" id="nameFilm" name="nameFilm" placeholder="Ex : Inception...">
+            <input type="text" id="nameFilm" name="nameFilm" autocomplete="off">
+            <input type="hidden" id="idFilmTMDB" name="idFilmTMDB" value="">              
+            <ul id="suggestions"></ul>
           </div>
           <button class="btn btn-fire" type="submit" name="sendFilm">🎥 Enregistrer</button>
         </form>
@@ -179,58 +185,24 @@
   </div>
 </div>
 
-<script>
-const panels = ['create', 'code', 'join', 'film', 'hat'];
-const titles = {
-  create: ['Créer un groupe',    'Nouveau groupe de cinéphiles'],
-  code:   ['Code d\'accès',      'Partage l\'accès à ton groupe'],
-  join:   ['Rejoindre',          'Entre dans un groupe existant'],
-  film:   ['Ajouter un film',    'Alimente la liste de ton groupe'],
-  hat:    ['Tirer au chapeau',   'Laisse le hasard décider'],
-};
-
-function showPanel(name, btn) {
-  document.getElementById('panel-welcome').style.display = 'none';
-  panels.forEach(p => {
-    const el = document.getElementById('panel-' + p);
-    if (el) el.classList.remove('active');
-  });
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-
-  const target = document.getElementById('panel-' + name);
-  if (target) {
-    target.classList.add('active');
-    void target.offsetWidth; // force reflow pour relancer l'animation
-  }
-  if (btn) btn.classList.add('active');
-
-  if (titles[name]) {
-    document.getElementById('topbar-title').textContent   = titles[name][0];
-    document.getElementById('topbar-subtitle').textContent = titles[name][1];
-  }
-}
-
-function closeModal(e) {
-  document.getElementById('modal-code').classList.remove('active');
-}
-
-// Réouverture automatique du bon panel après un POST PHP
-<?php if (isset($_POST['create_group'])): ?>
-  showPanel('create', document.querySelector('[onclick*="create"]'));
-<?php endif; ?>
-<?php if (isset($_POST['getCode'])): ?>
-  showPanel('code', document.querySelector('[onclick*="code"]'));
-<?php endif; ?>
-<?php if (isset($_POST['sendFilm'])): ?>
-  showPanel('film', document.querySelector('[onclick*="film"]'));
-<?php endif; ?>
-<?php if (isset($_POST['submitSendCode'])): ?>
-  showPanel('join', document.querySelector('[onclick*="join"]'));
-<?php endif; ?>
-<?php if (isset($_POST['submitTakeAHate'])): ?>
-  showPanel('hat', document.querySelector('[onclick*="hat"]'));
-<?php endif; ?>
-</script>
-
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        <?php if (isset($_POST['create_group'])): ?>
+            showPanel('create', document.querySelector('[onclick*="create"]'));
+        <?php endif; ?>
+        <?php if (isset($_POST['getCode'])): ?>
+            showPanel('code', document.querySelector('[onclick*="code"]'));
+        <?php endif; ?>
+        <?php if (isset($_POST['sendFilm'])): ?>
+            showPanel('film', document.querySelector('[onclick*="film"]'));
+        <?php endif; ?>
+        <?php if (isset($_POST['submitSendCode'])): ?>
+            showPanel('join', document.querySelector('[onclick*="join"]'));
+        <?php endif; ?>
+        <?php if (isset($_POST['submitTakeAHate']) || !empty($_SESSION['film'])): ?>
+            showPanel('hat', document.querySelector('[onclick*="hat"]'));
+        <?php endif; ?>
+    });
+</script>
 </html>

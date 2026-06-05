@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
     $dotenv->load();
-    
+
     require_once __DIR__ . '/../config/database.php';
     require_once __DIR__ . '/../app/tools/sanitize.php';
     require_once __DIR__ . '/../app/tools/hydrator.php';
@@ -26,6 +26,19 @@ error_reporting(E_ALL);
     require_once __DIR__ . '/../app/Controllers/FilmController.php';
     require_once __DIR__ . '/../app/Models/FilmModel.php';
 
+    
+    // ****************** API TMDB ****************************
+    $url = $_SERVER['REQUEST_URI'];
+
+    
+    // AJOUTE CETTE ROUTE :
+    if (strpos($url, '/popcornChaos/public/api/search') !== false) {
+        $controller = new FilmController($bdd);
+        $controller->searchAutocomplete();
+        exit; // On stoppe le script pour ne pas charger de layout HTML inutilement
+    }
+
+// ************************ les instances ************************
 
 $userController  = new UserController($bdd);
 $groupController = new GroupController($bdd);
@@ -40,11 +53,18 @@ $messageCode          = $groupController->getCodeGroup();
 $messageFilm          = $filmController->newFilm();
 $messageEnterGroup    = $groupController->joinGroup();
 $film                 = $groupController->takeHat();
+
     
     // **************affichage des pages***********
     
     $routes = require '../config/routes.php';
     $page = $_GET['page'] ?? 'connection';
+
+    // Protection des pages privées
+    if ($page === 'profil' && !isset($_SESSION['idUser'])) {
+        header('Location: ?page=connection');
+        exit;
+    }
     
     if ($page === '') {
         $page = 'connection';
@@ -59,6 +79,16 @@ $film                 = $groupController->takeHat();
     //     $title   = 'Erreur 404';
     //     $cssPage = null;
     // }
+
+// *****************Déconnection*****************************
+if ($page === 'logout') {
+    require '../app/Controllers/AuthController.php';
+
+    $auth = new AuthController();
+    $auth->logout();
+    exit;
+}
+
     // **************************layout******************
     require_once __DIR__ . '/../app/Views/layouts/layout.php';
 ?>
