@@ -77,7 +77,9 @@
             $req->bindValue(2, $code, PDO::PARAM_STR);
             $req->execute();
             
-            return $req->rowCount() > 0;
+            return $req->rowCount() > 0 
+                ? 'Vous avez rejoint le groupe !' 
+                : 'Code rejeté. Vous avez été trahi avant même de commencer.';
         }
 
         public function takeHat($group){
@@ -90,7 +92,8 @@
                 $req1->bindValue(1, $group, PDO::PARAM_INT);
                 $req1->execute();
                 $user = $req1->fetch();
-
+                if(!$user) return [];
+                
                 // 2. Tirer un film aléatoire de cet utilisateur pas encore tiré
                 $sql2 = "SELECT f.id_film, f.nom_film as nameFilm
                         FROM film f
@@ -102,8 +105,7 @@
                         LIMIT 1";
                 $req2 = $this->bdd->prepare($sql2);
                 $req2->execute([$user['id_utilisateur'], $group]);
-                $film = $req2->fetch(); 
-
+                $film = $req2->fetch();
                 if(!$film) return [];
 
                 // 3. Marquer le film comme tiré

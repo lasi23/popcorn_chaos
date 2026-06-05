@@ -16,12 +16,10 @@ class UserController extends BaseModel {
                         
                         $userModel = new UserModel($this->bdd);
                         if($userModel->emailExists($_POST['emailUser'])) {
-                            return "Identifiant déjà enregistré. Un autre vous existe déjà dans le système.
-Cet email est déjà actif. Le clonage est illégal dans 47 systèmes solaires. ";
+                            return "Cet email est déjà actif. Le clonage est illégal dans 47 systèmes solaires. ";
                         }
                         if($userModel->loginExist($_POST['loginUser'])) {
-                            return " Ce login est déjà pris. Quelqu'un porte votre nom. Trouvez-le. »
-« Login déjà utilisé. Il vous a volé votre identité avant vous. ";
+                            return " Ce login est déjà pris. Quelqu'un porte votre nom. Trouvez-le.";
                         }
 
                         $userEntities = new UserEntities;
@@ -32,16 +30,13 @@ Cet email est déjà actif. Le clonage est illégal dans 47 systèmes solaires. 
                         exit;
                         
                     } else {
-                        return "Votre mot de passe de confirmation ne correspond pas. Il a changé tout seul.
-Les deux mots de passe ne correspondent pas. Recommencez. Vite.";
+                        return "Votre mot de passe de confirmation ne correspond pas. Il a changé tout seul.";
                     }
                 } else {
-                    return "Adresse email non reconnue dans ce secteur de la galaxie. »
-« Protocole d'identification échoué. Cette adresse email n'existe dans aucune dimension.";                  
+                    return "Protocole d'identification échoué. Cette adresse email n'existe dans aucune dimension.";                  
                 }
             } else {
-                return "Vous avez laissé des champs vides. Les champs, ça se remplit. »
-« Remplissez tout. Oui, même ce champ-là. Surtout celui-là. ";
+                return "Vous avez laissé des champs vides. Les champs, ça se remplit.";
             }
         }
         return null;

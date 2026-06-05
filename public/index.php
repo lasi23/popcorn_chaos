@@ -52,7 +52,7 @@ $groups               = $groupController->getGroups();
 $messageCode          = $groupController->getCodeGroup();
 $messageFilm          = $filmController->newFilm();
 $messageEnterGroup    = $groupController->joinGroup();
-$film                 = $groupController->takeHat();
+$film                 = $groupController->takeHat() ?? [];
 
     
     // **************affichage des pages***********

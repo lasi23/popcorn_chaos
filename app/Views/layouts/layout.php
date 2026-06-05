@@ -15,6 +15,10 @@ $page    = $page ?? '';
     <?php if (!empty($cssPage)): ?>
         <link rel="stylesheet" href="<?= $cssPage ?>">
     <?php endif; ?>
+    <?php if ($page === 'profil'): ?>
+        <script src="/popcornChaos/public/assets/js/profil.js" defer></script>
+        <script src="/popcornChaos/public/assets/js/api.js" defer></script>
+    <?php endif; ?>
 </head>
 <body>
 
@@ -35,10 +39,6 @@ $page    = $page ?? '';
 
 <?php include 'footer.php' ?>
 
-<?php if ($page === 'profil'): ?>
-    <script src="/popcornChaos/public/assets/js/profil.js"></script>
-    <script src="/popcornChaos/public/assets/js/api.js"></script>
-<?php endif; ?>
 
 </body>
 </html>

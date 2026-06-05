@@ -10,12 +10,12 @@
                     $groupEntities->setIdCreator($_SESSION['idUser']);
                     $result = $newGroup->create($groupEntities);
                     if(!$result) {
-                        return 'Ce nom de groupe existe déjà !';
+                        return 'Ce nom de groupe est déjà pris. Dans ce milieu, ça ne pardonne pas.';
                     }
                     header('Location: profil');
                     exit;
                 }else{
-                    return 'We are group : trouver le vôtre';
+                    return "Un groupe sans nom c'est comme une pizza sans fromage. Nommez-le.";
                 }
             }
         }
@@ -46,7 +46,7 @@
                     return $getCode->getCodeGroup($groupEntities);
 
                 }
-                return 'Veuilez choisir un groupe';
+                return "Vous avez oublié de choisir un groupe. C'était le seul truc à faire. ";
             }
             return null;
         }
@@ -61,8 +61,9 @@
                     $userEntities->setIdUser(sanitize($_SESSION['idUser']));
                     return $joinGroup->joinGroup($groupEntities->getCodeGroup(), $userEntities->getIdUser());
                 }
+                return "Vous n'avez rien tapé. Et pourtant quelque chose a répondu.";
             }
-            return 'Veuillez mettre un code valide';
+            return null;
         }
 
         public function takeHat(){
@@ -71,6 +72,9 @@
                 if(!empty($_POST['idGroup']) && intval($_POST['idGroup']) > 0){
                     $takeHat = new GroupModel($this->bdd);
                     $film = $takeHat->takeHat(intval($_POST['idGroup']));
+                    if(empty($film) || $film === false){
+                        return 'Tous les films ont déjà été tirés !';
+                    }
                     return $film;
                 }
                 return 'Veuillez choisir un groupe';

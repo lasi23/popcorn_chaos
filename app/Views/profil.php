@@ -91,7 +91,7 @@
         <p class="msg"><?php echo $messagecreateGroup ?? '' ?></p>
       </div>
     </div>
-
+    
     <!-- PANEL: Code d'accès -->
     <div class="form-panel panel-code" id="panel-code">
       <div class="form-card">
@@ -103,40 +103,41 @@
               <option value="">-- Choisir un groupe --</option>
               <?php foreach ($groups ?? [] as $group): ?>
                 <option value="<?= $group->getIdGroup() ?>"><?= $group->getNameGroup() ?></option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-          <button class="btn btn-chaos" type="submit" name="getCode">🔑 Afficher le code</button>
-        </form>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <button class="btn btn-chaos" type="submit" name="getCode">🔑 Afficher le code</button>
+          </form>
+        </div>
       </div>
-    </div>
-
-    <!-- PANEL: Rejoindre un groupe -->
-    <div class="form-panel panel-join" id="panel-join">
-      <div class="form-card">
-        <div class="form-card-title">Rejoindre un groupe</div>
-        <form method="post">
-          <div class="field">
-            <label for="code">Code du groupe</label>
-            <input type="text" id="code" name="code" placeholder="Colle le code ici...">
-          </div>
-          <button class="btn btn-green" type="submit" name="submitSendCode">🚪 Rejoindre</button>
-        </form>
+      
+      <!-- PANEL: Rejoindre un groupe -->
+      <div class="form-panel panel-join" id="panel-join">
+        <div class="form-card">
+          <div class="form-card-title">Rejoindre un groupe</div>
+          <form method="post">
+            <div class="field">
+              <label for="code">Code du groupe</label>
+              <input type="text" id="code" name="code" placeholder="Colle le code ici...">
+            </div>
+            <button class="btn btn-green" type="submit" name="submitSendCode">🚪 Rejoindre</button>
+          </form>
+          <p class="msg"><?php echo $messageEnterGroup ?? '' ?></p>
+        </div>
       </div>
-    </div>
-
-    <!-- PANEL: Ajouter un film -->
-    <div class="form-panel panel-film" id="panel-film">
-      <div class="form-card">
-        <div class="form-card-title">Ajouter un film</div>
-        <form method="post" id="formFilm">
-          <div class="field">
-            <label for="idGroupFilm">Groupe</label>
-            <select name="idGroup" id="idGroupFilm">
-              <?php foreach ($groups ?? [] as $group): ?>
-                <option value="<?= $group->getIdGroup() ?>"><?= $group->getNameGroup() ?></option>
-              <?php endforeach; ?>
-            </select>
+      
+      <!-- PANEL: Ajouter un film -->
+      <div class="form-panel panel-film" id="panel-film">
+        <div class="form-card">
+          <div class="form-card-title">Ajouter un film</div>
+          <form method="post" id="formFilm">
+            <div class="field">
+              <label for="idGroupFilm">Groupe</label>
+              <select name="idGroup" id="idGroupFilm">
+                <?php foreach ($groups ?? [] as $group): ?>
+                  <option value="<?= $group->getIdGroup() ?>"><?= $group->getNameGroup() ?></option>
+                  <?php endforeach; ?>
+                </select>
           </div>
           <div class="field">
             <label for="nameFilm">Titre du film</label>
@@ -146,31 +147,36 @@
           </div>
           <button class="btn btn-fire" type="submit" name="sendFilm">🎥 Enregistrer</button>
         </form>
+        <p class="msg"><?php echo $messageFilm  ?? '' ?></p>
       </div>
     </div>
 
     <!-- PANEL: Tirer au chapeau -->
     <div class="form-panel panel-hat" id="panel-hat">
-      <div class="form-card">
-        <div class="form-card-title">Tirer au chapeau</div>
-        <form method="post">
-          <div class="field">
-            <label for="idGroupHat">Groupe</label>
-            <select name="idGroup" id="idGroupHat">
-              <?php foreach ($groups ?? [] as $group): ?>
-                <option value="<?= $group->getIdGroup() ?>"><?= $group->getNameGroup() ?></option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-          <button class="btn btn-gold" type="submit" name="submitTakeAHate">🎩 Sort ton film du chapeau</button>
-        </form>
-        <?php if (!empty($film)): ?>
-          <div class="hat-result show">
-            <div class="hat-result-label">Le film du soir c'est…</div>
-            <div class="hat-result-film">🎬 <?= htmlspecialchars($film['nameFilm']) ?></div>
-          </div>
-        <?php endif; ?>
-      </div>
+        <div class="form-card">
+            <div class="form-card-title">Tirer au chapeau</div>
+            <form method="post">
+                <div class="field">
+                    <label for="idGroupHat">Groupe</label>
+                    <select name="idGroup" id="idGroupHat">
+                        <?php foreach ($groups ?? [] as $group): ?>
+                            <option value="<?= $group->getIdGroup() ?>"><?= $group->getNameGroup() ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <button class="btn btn-gold" type="submit" name="submitTakeAHate">🎩 Sort ton film du chapeau</button>
+            </form>
+            <?php if (!empty($film) && is_array($film)): ?>
+                <div class="hat-result show">
+                    <div class="hat-result-label">Le film du soir c'est…</div>
+                    <div class="hat-result-film">🎬 <?= htmlspecialchars($film['nameFilm']) ?></div>
+                </div>
+            <?php elseif (!empty($film)): ?>
+                <div class="hat-result show">
+                    <div class="hat-result-label"><?= $film ?></div>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
 
   </div><!-- /main-content -->
